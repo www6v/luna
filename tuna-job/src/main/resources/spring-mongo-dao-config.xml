@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mongoClient" class="com.yihaodian.ymongo.client.YSimpleMongoClient">
+        <property name="mongoUrl" value="${mongo.url}" />
+        <property name="dbName" value="${mongo.db}" />
+        <property name="username" value="${mongo.username}" />
+        <property name="password" value="${mongo.password}" />
+        <property name="socketTimeout" value="${mongo.socketTimeout}" />
+        <property name="connectTimeout" value="${mongo.connectTimeout}" />
+        <property name="keepAlive" value="${mongo.keepAlive}" />
+        <property name="autoConnectRetry" value="${mongo.autoConnectRetry}" />
+        <property name="safe" value="true" />
+        <property name="fsync" value="true" />
+        <property name="positiveTestEnable" value="${mongo.positiveTestEnable}" />
+        <property name="detectingClassName" value="com.yhd.arch.tuna.pressure.dto.ReportInstance" />
+    </bean>
+
+    <bean id="mongoDAO" class="com.yhd.arch.tuna.linktree.dao.MongoDAO">
+        <property name="mongoClient" ref="mongoClient"/>
+    </bean>
+
+</beans>

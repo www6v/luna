@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC
+    "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="propertyConfigurer"
+          class="com.yihaodian.configcentre.client.utils.YccGlobalPropertyConfigurer">
+        <property name="poolId">
+            <value>yihaodian/tuna</value>
+        </property>
+        <property name="locations">
+            <list>
+                <value>tuna_spark.properties</value>
+                <value>tuna_mongo.properties</value>
+                <value>redis.xml</value>
+            </list>
+        </property>
+    </bean>
+    <import resource="spring-redis-dao-config.xml" />
+    <import resource="spring-mongo-dao-config.xml"/>
+</beans>

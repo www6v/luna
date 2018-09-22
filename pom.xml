@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.yihaodian.public</groupId>
+    <artifactId>public-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.yhd.arch.tuna</groupId>
+  <artifactId>tuna</artifactId>
+  <packaging>pom</packaging>
+  <version>0.1-SNAPSHOT</version>
+  <name>tuna</name>
+
+  <url>http://maven.apache.org</url>
+  <properties>
+    <junit.version>4.10</junit.version>
+    <ycc-client.version>2.1.1-SNAPSHOT</ycc-client.version>
+    <hedwig.version>0.2.6-SNAPSHOT</hedwig.version>
+    <jumper.version>0.5.3-SNAPSHOT</jumper.version>
+    <fastjson.version>1.2.29</fastjson.version>
+    <jumper-receiver.version>0.0.1-SNAPSHOT</jumper-receiver.version>
+    <ycache-client.version>2.3.2.1-SNAPSHOT</ycache-client.version>
+
+    <log4j.version>1.2.16</log4j.version>
+    <slf4j-api.version>1.6.2</slf4j-api.version>
+    <slf4j-log4j12.version>1.6.2</slf4j-log4j12.version>
+  </properties>
+
+  <dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.yihaodian.architecture</groupId>
+      <artifactId>hedwig-common</artifactId>
+      <version>${hedwig.version}</version>
+    </dependency>
+
+    <dependency>
+    <groupId>com.yihaodian.architecture</groupId>
+    <artifactId>jumper-consumerclient</artifactId>
+    <version>${jumper.version}</version>
+    <exclusions>
+      <exclusion>
+        <artifactId>cglib</artifactId>
+        <groupId>cglib</groupId>
+      </exclusion>
+    </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.yihaodian.architecture</groupId>
+      <artifactId>jumper-receiver</artifactId>
+      <version>${jumper-receiver.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.yihaodian.architecture</groupId>
+      <artifactId>hedwig-zk</artifactId>
+      <version>${hedwig.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.yihaodian.configcentre</groupId>
+      <artifactId>ycc-client</artifactId>
+      <version>${ycc-client.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.yihaodian.architecture</groupId>
+      <artifactId>ycache-client</artifactId>
+      <version>${ycache-client.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j-log4j12.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+  </dependencies>
+  </dependencyManagement>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+          <skipTests>true</skipTests>
+          <testFailureIgnore>false</testFailureIgnore>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <!-- Ignore/Execute plugin execution -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>${lifecycle-mapping.version}</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <!-- copy-dependency plugin -->
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <versionRange>[1.0.0,)</versionRange>
+                    <goals>
+                      <goal>copy-dependencies</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>com.keyboardsamurais.maven</groupId>
+                    <artifactId>maven-timestamp-plugin</artifactId>
+                    <versionRange>[0.0.0,)</versionRange>
+                    <goals>
+                      <goal>create</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                    <artifactId>svn-revision-number-maven-plugin</artifactId>
+                    <versionRange>[1.0.0,)</versionRange>
+                    <goals>
+                      <goal>revision</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <modules>
+    <module>tuna-common</module>
+    <module>tuna-job</module>
+  </modules>
+</project>
